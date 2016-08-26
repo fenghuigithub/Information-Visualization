@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+   <title>D3 tutorial</title>
+   <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+ 
+ <body>
+   <script>
+
+      d3.csv("CoffeeData.csv", function (data){
+
+         var canvas = d3.select("body")
+                    .append("svg")
+                    .attr("width",1000)
+                    .attr("height",1000);
+         canvas.selectAll("rect")
+                       .data(data)
+                       .enter()
+                           .append("rect")
+                           .attr("width", 60)
+                           .attr("height", function(d) { return d.sales; })
+                           .attr("fill","blue")
+                           .attr("x", function(d, i){ return i * 100;})
+
+         canvas.selectAll("text")
+                       .data(data)
+                       .enter()
+                           .append("text") 
+                           .attr("fill","red")
+                           .attr("x", function (d,i) { return i * 100; }) 
+                           .attr("y", 50)
+                           .text(function(d) { return d.category; })                      
+
+
+
+      })
+      
+      
+   </script>
+ </body>
+ </html>                        
